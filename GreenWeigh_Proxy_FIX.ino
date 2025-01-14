@@ -32,7 +32,7 @@ IPAddress proxy(10, 97, 4, 1);
 int ProxyPort = 8080;  //0為不使用
 IPAddress serverOA(10, 96, 192, 93);
 //===========================================================
-float scale_factor = 1.66;  //比例參數，從校正程式中取得
+float scale_factor = 12.4;  //比例參數，從校正程式中取得
 int scale_eeprom = 0;       //比例參數，從校正程式中取得
 //const float scale_factor = 101;  //比例參數，從校正程式中取得
 HX711 scale;
@@ -68,14 +68,14 @@ void setup() {
   Val1 = EEPROM.read(0);
   Val2 = EEPROM.read(1);
   if (Val1 == 0 and Val2 == 0) {
-    Val1 = 166;
-    Val2 = 0;
+    Val1 = 216;
+    Val2 = 4;
   }
   ReadNet();
   scale_eeprom = Val1 + Val2 * 256;
   Serial.println(scale_eeprom);
   if (scale_eeprom <= 0) {
-    scale_eeprom = 166;
+    scale_eeprom = 1240;
   }
 
   scale_factor = float(scale_eeprom) / 100.0;
